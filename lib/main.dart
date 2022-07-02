@@ -1,7 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_provider_demo/inherited_test.dart';
 import 'package:flutter_provider_demo/provider_test.dart';
 import 'package:flutter_provider_demo/web_page.dart';
+
+import 'html/fake_html.dart' if (dart.library.html) 'html/real_html.dart'
+    as html;
 
 void main() {
   runApp(const MyApp());
@@ -60,18 +64,24 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget _webAction(BuildContext context) {
     return IconButton(
-      onPressed: () {
-        Navigator.of(context).pushNamed(
-          WebPage.route,
-          arguments:
-              const WebPageParams(url: 'https://note.youdao.com/s/6ynAn0Yq'),
-        );
-      },
+      onPressed: _openWeb,
       icon: const Icon(
         Icons.details,
         color: Colors.white,
       ),
     );
+  }
+
+  void _openWeb() {
+    const url = 'https://note.youdao.com/s/6ynAn0Yq';
+    if (kIsWeb) {
+      html.window.open(url, '_blank');
+    } else {
+      Navigator.of(context).pushNamed(
+        WebPage.route,
+        arguments: const WebPageParams(url: url),
+      );
+    }
   }
 
   Widget _listItem(BuildContext context, int index) {
