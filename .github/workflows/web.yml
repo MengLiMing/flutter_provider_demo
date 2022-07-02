@@ -1,13 +1,10 @@
-name: Flutter Web
-on:
-  push:
-    branches:
-      - master
+name: build flutter web
+on: [push, pull_request]
 jobs:
   build:
     name: Build Web
     env:
-      my_secret: ${{secrets.commit_secret}}
+      my_secret: ${{secrets.commit_secret1}}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -16,7 +13,7 @@ jobs:
           channel: "dev"
       - run: flutter config --enable-web
       - run: flutter pub get
-      - run: flutter build web --release
+      - run: flutter build web --release --web-renderer canvaskit --base-href '/flutter_provider_demo/'
       - run: |
           cd build/web
           git init
