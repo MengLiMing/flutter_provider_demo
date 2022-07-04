@@ -6,8 +6,6 @@ final countProvider = Provider((ref) {
 });
 
 class RiverProviderTestPage extends ConsumerStatefulWidget {
-  static const route = '/providerTest';
-
   const RiverProviderTestPage({Key? key}) : super(key: key);
 
   @override

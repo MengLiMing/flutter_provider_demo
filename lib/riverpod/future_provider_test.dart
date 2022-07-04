@@ -19,8 +19,6 @@ Future<String> loadSomething() async {
 }
 
 class FutureProviderTestPage extends ConsumerStatefulWidget {
-  static const route = '/futureProvider';
-
   const FutureProviderTestPage({Key? key}) : super(key: key);
 
   @override

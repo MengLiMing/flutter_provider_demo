@@ -1,15 +1,17 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_provider_demo/common/deffer_library_widget.dart';
+import 'package:flutter_provider_demo/inherited_test.dart'
+    deferred as inherited_test;
+import 'package:flutter_provider_demo/provider_test.dart'
+    deferred as provider_test;
+import 'package:flutter_provider_demo/web_page.dart' deferred as web_page;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'common/custom_route_list.dart';
 import 'html/fake_html.dart' if (dart.library.html) 'html/real_html.dart'
     as html;
-import 'inherited_test.dart';
-import 'provider_test.dart';
-import 'riverpod/river_pod_page.dart';
 import 'riverpod/riverpod.dart';
-import 'web_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,13 +27,7 @@ class MyApp extends StatelessWidget {
     return ProviderScope(
       child: MaterialApp(
         title: 'Flutter Demo',
-        routes: {
-          '/': (context) => const MyHomePage(),
-          CounterPage.route: (context) => const CounterPage(),
-          WebPage.route: (context) => const WebPage(),
-          ProviderPage.route: (context) => const ProviderPage(),
-          ...riverpods,
-        },
+        routes: routes,
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
@@ -44,9 +40,9 @@ class MyHomePage extends StatelessWidget {
   const MyHomePage({Key? key}) : super(key: key);
 
   final List<RouteListItem> _items = const [
-    RouteListItem(title: "InheritedWidget", route: CounterPage.route),
-    RouteListItem(title: 'Provider', route: ProviderPage.route),
-    RouteListItem(title: 'RiverPod', route: RiverPodPage.route),
+    RouteListItem(title: "InheritedWidget", route: '/inherited'),
+    RouteListItem(title: 'Provider', route: '/provider'),
+    RouteListItem(title: 'RiverPod', route: '/riverPod'),
   ];
 
   @override
@@ -78,9 +74,32 @@ class MyHomePage extends StatelessWidget {
       html.window.open(url, '_blank');
     } else {
       Navigator.of(context).pushNamed(
-        WebPage.route,
-        arguments: const WebPageParams(url: url),
+        '/web',
+        arguments: url,
       );
     }
   }
 }
+
+Map<String, WidgetBuilder> routes = {
+  '/': (context) => const MyHomePage(),
+  '/inherited': (context) => DefferLibraryWidget(
+        libraryFuture: inherited_test.loadLibrary(),
+        child: (context) {
+          return inherited_test.CounterPage();
+        },
+      ),
+  '/web': (context) => DefferLibraryWidget(
+        libraryFuture: web_page.loadLibrary(),
+        child: (context) {
+          return web_page.WebPage();
+        },
+      ),
+  '/provider': (context) => DefferLibraryWidget(
+        libraryFuture: provider_test.loadLibrary(),
+        child: (context) {
+          return provider_test.ProviderPage();
+        },
+      ),
+  ...riverpods,
+};

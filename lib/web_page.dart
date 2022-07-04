@@ -8,14 +8,11 @@ class WebPageParams {
 }
 
 class WebPage extends StatelessWidget {
-  static const route = '/web';
-
   const WebPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as WebPageParams?;
-    final String? url = args?.url;
+    final String? url = ModalRoute.of(context)!.settings.arguments as String?;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Web'),

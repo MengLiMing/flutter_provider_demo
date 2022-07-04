@@ -4,8 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 final countProvider = StateProvider((ref) => 0);
 
 class StateProviderTestPage extends ConsumerWidget {
-  static const route = '/stateProvider';
-
   const StateProviderTestPage({Key? key}) : super(key: key);
 
   @override

@@ -21,6 +21,18 @@ environment:
   sdk: ">=2.17.0 <3.0.0"
   flutter: ">=3.0.0"
 
+deferred-components:
+  - name: defferLibrary
+    libraries:
+      - package:flutter_provider_demo/inherited_test.dart
+      - package:flutter_provider_demo/provider_test.dart
+      - package:flutter_provider_demo/web_page.dart
+      - package:flutter_provider_demo/riverpod/river_pod_page.dart
+      - package:flutter_provider_demo/riverpod/future_provider_test.dart
+      - package:flutter_provider_demo/riverpod/provider_test.dart
+      - package:flutter_provider_demo/riverpod/state_notifier_test.dart
+      - package:flutter_provider_demo/riverpod/state_provider_test.dart
+
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
 # consider running `flutter pub upgrade --major-versions`. Alternatively,

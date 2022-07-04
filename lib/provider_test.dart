@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ProviderPage extends StatefulWidget {
-  static const route = '/provider';
-
   const ProviderPage({Key? key}) : super(key: key);
 
   @override

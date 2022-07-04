@@ -21,8 +21,6 @@ final todosProvider = StateNotifierProvider<TodosNotifier, List<String>>(
     (ref) => TodosNotifier([]));
 
 class StateNotifierProviderTestPage extends ConsumerStatefulWidget {
-  static const route = '/stateNotifierProvider';
-
   const StateNotifierProviderTestPage({Key? key}) : super(key: key);
 
   @override
