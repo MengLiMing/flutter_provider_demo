@@ -31,6 +31,7 @@ class DefferLibraryWidget extends StatelessWidget {
   Widget _loadWidget() {
     return Scaffold(
       body: Container(
+        alignment: Alignment.center,
         color: Colors.white,
         child: const CircularProgressIndicator(),
       ),
